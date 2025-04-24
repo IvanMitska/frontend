@@ -1,3 +1,8 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Disallow: /api/
+Disallow: /admin/
+Allow: /recipes/
+Allow: /categories/
+Allow: /users/
+Sitemap: https://receptoria.ru/sitemap.xml

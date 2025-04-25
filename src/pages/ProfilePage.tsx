@@ -15,6 +15,7 @@ const ProfilePage: React.FC = () => {
       date: '2023-04-15',
       views: 142,
       rating: 4.8,
+      imageUrl: 'https://images.unsplash.com/photo-1612031737269-bb54049c6423?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&h=150'
     },
     {
       id: 2,
@@ -23,6 +24,7 @@ const ProfilePage: React.FC = () => {
       date: '2023-03-22',
       views: 98,
       rating: 4.5,
+      imageUrl: 'https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&h=150'
     },
     {
       id: 3,
@@ -31,6 +33,7 @@ const ProfilePage: React.FC = () => {
       date: '2023-04-18',
       views: 0,
       rating: 0,
+      imageUrl: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&h=150'
     },
   ];
 
@@ -41,6 +44,7 @@ const ProfilePage: React.FC = () => {
       author: 'Елена Петрова',
       date: '2023-01-10',
       rating: 4.9,
+      imageUrl: 'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&h=150'
     },
     {
       id: 5,
@@ -48,6 +52,7 @@ const ProfilePage: React.FC = () => {
       author: 'Иван Иванов',
       date: '2023-02-05',
       rating: 4.7,
+      imageUrl: 'https://images.unsplash.com/photo-1619895092538-128341789043?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&h=150'
     },
   ];
 
@@ -137,6 +142,9 @@ const ProfilePage: React.FC = () => {
                     <thead className="bg-gray-50">
                       <tr>
                         <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
+                          Изображение
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
                           Название
                         </th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
@@ -159,6 +167,9 @@ const ProfilePage: React.FC = () => {
                     <tbody className="divide-y divide-gray-200">
                       {myRecipes.map((recipe) => (
                         <tr key={recipe.id}>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <img src={recipe.imageUrl} alt={recipe.name} className="w-16 h-12 object-cover rounded" />
+                          </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-text-primary">
                             <Link to={`/recipes/${recipe.id}`} className="hover:text-primary">
                               {recipe.name}
@@ -225,27 +236,36 @@ const ProfilePage: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {favoriteRecipes.map((recipe) => (
                     <div key={recipe.id} className="border rounded-lg overflow-hidden hover:shadow-md transition-shadow">
-                      <div className="p-4">
-                        <h3 className="font-semibold text-lg">
-                          <Link to={`/recipes/${recipe.id}`} className="hover:text-primary">
-                            {recipe.name}
-                          </Link>
-                        </h3>
-                        <p className="text-text-secondary text-sm">Автор: {recipe.author}</p>
-                        <div className="flex justify-between mt-2 text-sm text-text-secondary">
-                          <span>Добавлено: {recipe.date}</span>
-                          <span className="flex items-center">
-                            <span className="text-yellow-500 mr-1">★</span>
-                            {recipe.rating}
-                          </span>
+                      <div className="flex">
+                        <div className="w-1/3">
+                          <img 
+                            src={recipe.imageUrl} 
+                            alt={recipe.name} 
+                            className="h-full w-full object-cover"
+                          />
                         </div>
-                        <div className="mt-4 flex justify-between">
-                          <Link to={`/recipes/${recipe.id}`} className="text-primary hover:underline">
-                            Смотреть рецепт
-                          </Link>
-                          <button className="text-red-600 hover:underline">
-                            Удалить из избранного
-                          </button>
+                        <div className="p-4 w-2/3">
+                          <h3 className="font-semibold text-lg">
+                            <Link to={`/recipes/${recipe.id}`} className="hover:text-primary">
+                              {recipe.name}
+                            </Link>
+                          </h3>
+                          <p className="text-text-secondary text-sm">Автор: {recipe.author}</p>
+                          <div className="flex justify-between mt-2 text-sm text-text-secondary">
+                            <span>Добавлено: {recipe.date}</span>
+                            <span className="flex items-center">
+                              <span className="text-yellow-500 mr-1">★</span>
+                              {recipe.rating}
+                            </span>
+                          </div>
+                          <div className="mt-4 flex justify-between">
+                            <Link to={`/recipes/${recipe.id}`} className="text-primary hover:underline">
+                              Смотреть рецепт
+                            </Link>
+                            <button className="text-red-600 hover:underline">
+                              Удалить из избранного
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
